@@ -21,7 +21,7 @@ function App() {
   return (
     <Router>
       <RouteDebugger />
-      <div className="App">
+      <div className="App font-poppins">
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
