@@ -42,6 +42,12 @@ const CodingHero = () => {
             </div>
             <div className="flex flex-col space-y-2">
               <Link 
+                to="/" 
+                className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
+              >
+                HOME
+              </Link>
+              <Link 
                 to="/painting" 
                 className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
               >
@@ -52,12 +58,6 @@ const CodingHero = () => {
                 className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
               >
                 CALLIGRAPHY
-              </Link>
-              <Link 
-                to="/" 
-                className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
-              >
-                HOME
               </Link>
               <Link 
                 to="/knitting" 
