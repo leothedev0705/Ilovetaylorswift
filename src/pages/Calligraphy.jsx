@@ -1,9 +1,11 @@
 import React from 'react';
-import CalligraphyHero from '../components/Calligraphy/CalligraphyHero';
+import CalligraphyHero from '../components/HobbyHeroes/CalligraphyHero';
+import Navbar from '../components/Navbar';
 
 const Calligraphy = () => {
   return (
     <div className="calligraphy-page">
+      <Navbar />
       <CalligraphyHero />
     </div>
   );

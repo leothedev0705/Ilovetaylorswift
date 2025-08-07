@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import HeroBgImg from '../../assets/HeroBgImg.png';
 import LuziAnime from '../../assets/Luzi_Anime.png';
 
-const PaintingHero = () => {
+const CalligraphyHero = () => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -93,10 +93,10 @@ const PaintingHero = () => {
                 HOME
               </Link>
               <Link 
-                to="/calligraphy" 
+                to="/painting" 
                 className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
               >
-                CALLIGRAPHY
+                PAINTING
               </Link>
               <Link 
                 to="/coding" 
@@ -133,4 +133,4 @@ const PaintingHero = () => {
   );
 };
 
-export default PaintingHero; 
+export default CalligraphyHero;
