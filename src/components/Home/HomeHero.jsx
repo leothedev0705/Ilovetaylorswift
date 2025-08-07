@@ -7,7 +7,7 @@ import LuziAnime from '../../assets/Luzi_Anime.png';
 const HomeHero = () => {
   return (
     <section 
-      className="min-h-screen relative flex items-center justify-center font-poppins"
+      className="min-h-screen relative flex items-center justify-center"
       style={{
         backgroundImage: `url(${HeroBgImg})`,
         backgroundSize: 'cover',
