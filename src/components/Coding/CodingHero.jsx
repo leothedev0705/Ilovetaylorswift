@@ -1,53 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import HeroBgImg from '../../assets/HeroBgImg.png';
 import LuziAnime from '../../assets/Luzi_Anime.png';
 
-const PaintingHero = () => {
-  const [currentText, setCurrentText] = useState('');
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  
-  const texts = ['Designer', 'Developer', 'Vibe Coder'];
-  const typingSpeed = 150;
-  const deletingSpeed = 100;
-  const pauseTime = 2000;
-
-  useEffect(() => {
-    const currentWord = texts[currentIndex];
-    
-    if (isDeleting) {
-      // Deleting effect
-      if (currentText === '') {
-        setIsDeleting(false);
-        setCurrentIndex((prev) => (prev + 1) % texts.length);
-        return;
-      }
-      
-      const timeout = setTimeout(() => {
-        setCurrentText(currentText.slice(0, -1));
-      }, deletingSpeed);
-      
-      return () => clearTimeout(timeout);
-    } else {
-      // Typing effect
-      if (currentText === currentWord) {
-        // Pause before deleting
-        const timeout = setTimeout(() => {
-          setIsDeleting(true);
-        }, pauseTime);
-        
-        return () => clearTimeout(timeout);
-      }
-      
-      const timeout = setTimeout(() => {
-        setCurrentText(currentWord.slice(0, currentText.length + 1));
-      }, typingSpeed);
-      
-      return () => clearTimeout(timeout);
-    }
-  }, [currentText, currentIndex, isDeleting, texts]);
-
+const CodingHero = () => {
   return (
     <section 
       className="min-h-screen relative flex items-center justify-center"
@@ -70,8 +26,7 @@ const PaintingHero = () => {
               Luziana Dmello
             </h1>
             <p className="text-4xl md:text-6xl text-white mb-8 drop-shadow-lg">
-              is a {currentText}
-              <span className="animate-pulse">|</span>
+              is a Designer
             </p>
           </div>
           
@@ -87,10 +42,10 @@ const PaintingHero = () => {
             </div>
             <div className="flex flex-col space-y-2">
               <Link 
-                to="/" 
+                to="/painting" 
                 className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
               >
-                HOME
+                PAINTING
               </Link>
               <Link 
                 to="/calligraphy" 
@@ -99,10 +54,10 @@ const PaintingHero = () => {
                 CALLIGRAPHY
               </Link>
               <Link 
-                to="/coding" 
+                to="/" 
                 className="text-white text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer"
               >
-                CODING
+                HOME
               </Link>
               <Link 
                 to="/knitting" 
@@ -133,4 +88,4 @@ const PaintingHero = () => {
   );
 };
 
-export default PaintingHero; 
+export default CodingHero;
