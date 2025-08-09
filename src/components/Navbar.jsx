@@ -10,11 +10,23 @@ const Navbar = () => {
 
   return (
     <>
-      {/* Main Navbar */}
-      <nav className="absolute bottom-0 left-0 right-0 z-50">
+      {/* Mobile Hamburger Icon */}
+      <div className="lg:hidden fixed top-6 right-6 z-50">
+        <button
+          onClick={toggleMenu}
+          className="bg-white bg-opacity-20 backdrop-blur-sm rounded-full p-3 text-white hover:bg-opacity-30 transition-all duration-300"
+        >
+          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+
+      {/* Desktop Navbar - Hidden on Mobile */}
+      <nav className="hidden lg:block fixed bottom-0 left-0 right-0 z-50">
         <div className="container mx-auto px-6 py-4">
           {/* Segmented Navigation Bar */}
-          <div className="max-w-3xl mx-auto">
+          <div className="max-w-4xl mx-auto">
             <div className="bg-white bg-opacity-95 backdrop-blur-sm rounded-full p-1 shadow-lg">
               <div className="flex">
                 {/* Home Section */}
@@ -41,16 +53,24 @@ const Navbar = () => {
                   My Projects
                 </Link>
 
-                {/* Book a Call Button */}
+                {/* Contact Me Button */}
                 <button
                   onClick={toggleMenu}
+                  className="flex-1 text-center py-2 px-4 rounded-full text-gray-800 font-semibold hover:bg-purple-100 transition-all duration-300 text-sm"
+                >
+                  Contact Me
+                </button>
+
+                {/* View Resume Button */}
+                <a
+                  href="/Luziana%20DMello's%20CV.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex-1 bg-black text-white py-2 px-4 rounded-full font-semibold hover:bg-gray-800 transition-all duration-300 flex items-center justify-center space-x-1 text-sm"
                 >
-                  <span>Book a Call</span>
-                  <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </button>
+                  <span>View Resume</span>
+                  <span>📄</span>
+                </a>
               </div>
             </div>
           </div>
