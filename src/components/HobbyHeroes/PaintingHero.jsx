@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import PaintingBgImg from '../../assets/Painting_Bg.png';
 import PaintingGalImg from '../../assets/Painting_Gal.png';
 
@@ -65,7 +66,7 @@ const PaintingHero = () => {
       <div className="container mx-auto px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
         {/* Mobile Layout - Character at Top */}
         <div className="lg:hidden flex-1 flex justify-center items-center mb-8">
-          <img 
+          <motion.img 
             src={PaintingGalImg} 
             alt="Painting Character" 
             style={{
@@ -75,6 +76,13 @@ const PaintingHero = () => {
               objectFit: 'contain'
             }}
             className="object-contain"
+            initial={{ rotateX: -180, y: -100, opacity: 0 }}
+            animate={{ rotateX: 0, y: 0, opacity: 1 }}
+            exit={{ rotateX: 180, y: 100, opacity: 0 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: "easeInOut"
+            }}
           />
         </div>
 
@@ -131,7 +139,7 @@ const PaintingHero = () => {
 
         {/* Desktop Layout - Character on Right */}
         <div className="hidden lg:flex flex-1 justify-center items-center min-h-screen">
-          <img 
+          <motion.img 
             src={PaintingGalImg} 
             alt="Painting Character" 
             style={{
@@ -141,6 +149,13 @@ const PaintingHero = () => {
               objectFit: 'contain'
             }}
             className="object-contain"
+            initial={{ rotateX: -180, y: -100, opacity: 0 }}
+            animate={{ rotateX: 0, y: 0, opacity: 1 }}
+            exit={{ rotateX: 180, y: 100, opacity: 0 }}
+            transition={{ 
+              duration: 0.8, 
+              ease: "easeInOut"
+            }}
           />
         </div>
       </div>

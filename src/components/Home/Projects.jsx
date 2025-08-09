@@ -1,10 +1,11 @@
 "use client"
 
-import React, { useRef, useLayoutEffect, useState } from "react";
+import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
 import {
     motion,
     useScroll,
     useTransform,
+    useInView,
 } from "framer-motion";
 import BaysideSportsImg from '../../assets/Projects/Bayside_Sports.png';
 
@@ -14,6 +15,13 @@ function Image({ id, image, title }) {
     const textRef = useRef(null);
     const [imgHeight, setImgHeight] = useState(0);
     const [textHeight, setTextHeight] = useState(0);
+    const [displayedText, setDisplayedText] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+
+    // Check if this section is in view
+    const isInView = useInView(containerRef, { 
+        threshold: 0.3
+    });
 
     // Get scroll progress for this specific section
     const { scrollYProgress } = useScroll({
@@ -25,6 +33,31 @@ function Image({ id, image, title }) {
         if (imgRef.current) setImgHeight(imgRef.current.offsetHeight);
         if (textRef.current) setTextHeight(textRef.current.offsetHeight);
     }, []);
+
+    // Typing animation effect
+    useEffect(() => {
+        if (isInView) {
+            setIsTyping(true);
+            setDisplayedText('');
+            let currentIndex = 0;
+            
+            const typeText = () => {
+                if (currentIndex <= title.length) {
+                    setDisplayedText(title.slice(0, currentIndex));
+                    currentIndex++;
+                    setTimeout(typeText, 50); // Typing speed - faster!
+                } else {
+                    setIsTyping(false);
+                }
+            };
+            
+            setTimeout(typeText, 200); // Delay before starting
+        } else {
+            // Reset when out of view
+            setDisplayedText('');
+            setIsTyping(false);
+        }
+    }, [isInView, title]);
 
     // Map scroll progress to text position: from top of image to bottom
     const y = useTransform(
@@ -53,7 +86,10 @@ function Image({ id, image, title }) {
                     }}
                     className="text-6xl lg:text-8xl font-medium absolute drop-shadow-lg overlay-title whitespace-nowrap"
                 >
-                    {title}
+                    {displayedText}
+                    {isTyping && displayedText.length < title.length && (
+                        <span className="animate-pulse">|</span>
+                    )}
                 </motion.h2>
             </div>
         </section>
