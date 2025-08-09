@@ -15,34 +15,22 @@ function Image({ id, image, title }) {
     const [imgHeight, setImgHeight] = useState(0);
     const [textHeight, setTextHeight] = useState(0);
 
-    // Use window scroll instead of section scroll
-    const { scrollY } = useScroll();
+    // Get scroll progress for this specific section
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"]
+    });
 
     useLayoutEffect(() => {
         if (imgRef.current) setImgHeight(imgRef.current.offsetHeight);
         if (textRef.current) setTextHeight(textRef.current.offsetHeight);
     }, []);
 
-    // Calculate text position based on container position and window scroll
+    // Map scroll progress to text position: from top of image to bottom
     const y = useTransform(
-        scrollY,
-        (value) => {
-            if (!containerRef.current) return 0;
-            
-            const rect = containerRef.current.getBoundingClientRect();
-            const containerTop = rect.top + window.scrollY;
-            const containerBottom = containerTop + rect.height;
-            const currentScroll = value;
-            
-            // Calculate progress through this section
-            const progress = Math.max(0, Math.min(1, 
-                (currentScroll - containerTop + window.innerHeight) / 
-                (rect.height + window.innerHeight)
-            ));
-            
-            // Map progress to text position from top to bottom of image
-            return progress * (imgHeight - textHeight);
-        }
+        scrollYProgress,
+        [0, 1],
+        [0, Math.max(0, imgHeight - textHeight)]
     );
 
     return (
@@ -63,7 +51,7 @@ function Image({ id, image, title }) {
                         backgroundClip: "text",
                         color: "transparent"
                     }}
-                    className="text-6xl lg:text-7xl font-medium absolute drop-shadow-lg overlay-title"
+                    className="text-6xl lg:text-8xl font-medium absolute drop-shadow-lg overlay-title whitespace-nowrap"
                 >
                     {title}
                 </motion.h2>
