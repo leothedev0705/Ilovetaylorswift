@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React, { useRef, useLayoutEffect, useState, useEffect } from "react";
 import {
@@ -7,27 +7,28 @@ import {
     useTransform,
     useInView,
 } from "framer-motion";
-import BaysideSportsImg from '../../assets/Projects/Bayside_Sports.png';
+import BaysideSportsImg from "../../assets/Projects/Bayside_Sports.png";
 
-function Image({ id, image, title }) {
+function Image({ id, image, title, isLast }) {
     const containerRef = useRef(null);
     const imgRef = useRef(null);
     const textRef = useRef(null);
     const [imgHeight, setImgHeight] = useState(0);
     const [textHeight, setTextHeight] = useState(0);
-    const [displayedText, setDisplayedText] = useState('');
+    const [displayedText, setDisplayedText] = useState("");
     const [isTyping, setIsTyping] = useState(false);
 
-    // Check if this section is in view
-    const isInView = useInView(containerRef, { 
-        threshold: 0.3
+    const isInView = useInView(containerRef, {
+        threshold: 0.3,
     });
 
-    // Get scroll progress for this specific section
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "end start"]
+        offset: ["start end", "end start"],
     });
+
+    // Smooth parallax for image
+    const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 20]);
 
     useLayoutEffect(() => {
         if (imgRef.current) setImgHeight(imgRef.current.offsetHeight);
@@ -38,53 +39,70 @@ function Image({ id, image, title }) {
     useEffect(() => {
         if (isInView) {
             setIsTyping(true);
-            setDisplayedText('');
+            setDisplayedText("");
             let currentIndex = 0;
-            
             const typeText = () => {
                 if (currentIndex <= title.length) {
                     setDisplayedText(title.slice(0, currentIndex));
                     currentIndex++;
-                    setTimeout(typeText, 50); // Typing speed - faster!
+                    setTimeout(typeText, 50);
                 } else {
                     setIsTyping(false);
                 }
             };
-            
-            setTimeout(typeText, 200); // Delay before starting
+            setTimeout(typeText, 200);
         } else {
-            // Reset when out of view
-            setDisplayedText('');
+            setDisplayedText("");
             setIsTyping(false);
         }
     }, [isInView, title]);
 
-    // Map scroll progress to text position: from top of image to bottom
+    // Stop y movement earlier so it doesn't overlap footer
     const y = useTransform(
         scrollYProgress,
-        [0, 1],
+        [0, 0.9], // stops before bottom
         [0, Math.max(0, imgHeight - textHeight)]
     );
 
+    // Opacity fade out near the bottom
+    const opacity = useTransform(scrollYProgress, [0, 0.8, 1], [1, 1, 0]);
+
     return (
-        <section className="img-container" ref={containerRef}>
-            <div style={{ position: 'relative' }}>
-                <img
+        <section
+            className="img-container"
+            ref={containerRef}
+            style={{
+                paddingBottom: isLast ? "8rem" : "0", // extra space for last item
+                overflow: "hidden", // prevent bleed
+            }}
+        >
+            <div style={{ position: "relative" }}>
+                <motion.img
                     ref={imgRef}
                     src={image}
                     alt={`${title} Project`}
+                    initial={{ opacity: 0, y: 150, scale: 0.9 }}
+                    whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                    transition={{ duration: 1.2, ease: "easeOut" }}
+                    viewport={{ once: true, amount: 0.3 }}
+                    style={{ y: parallaxY }}
+                    className="w-full h-auto will-change-transform"
                 />
                 <motion.h2
                     ref={textRef}
                     style={{
                         y,
-                        background: "linear-gradient(90deg, #FFFFFF 0%, #D770D7 100%)",
+                        opacity,
+                        background:
+                            "linear-gradient(90deg, #FFFFFF 0%, #D770D7 100%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text",
-                        color: "transparent"
+                        color: "transparent",
+                        willChange: "transform",
+                        transition: "transform 0.4s ease-out",
                     }}
-                    className="text-6xl lg:text-8xl font-medium absolute drop-shadow-lg overlay-title whitespace-nowrap"
+                    className="text-6xl lg:text-8xl font-medium absolute left-0 translate-x-0 drop-shadow-lg overlay-title whitespace-nowrap z-0 pointer-events-none"
                 >
                     {displayedText}
                     {isTyping && displayedText.length < title.length && (
@@ -93,52 +111,63 @@ function Image({ id, image, title }) {
                 </motion.h2>
             </div>
         </section>
-    )
+    );
 }
 
 const Projects = () => {
     const projects = [
         { id: 1, image: BaysideSportsImg, title: "Bayside Sports" },
-        { id: 2, image: BaysideSportsImg, title: "Fluxurous Tech" }
+        { id: 2, image: BaysideSportsImg, title: "Fluxurous Tech" },
+        { id: 3, image: BaysideSportsImg, title: "Pixel Portfolio" },
+        { id: 4, image: BaysideSportsImg, title: "Artisan Avenue" },
     ];
 
     return (
         <div id="example" className="bg-black relative">
             {/* Vertical Lines Background Pattern */}
             <div className="absolute inset-0 opacity-40">
-                <div className="h-full w-full" style={{
-                    backgroundImage: 'linear-gradient(90deg, rgba(165, 165, 165, 0.5) 1px, transparent 1px)',
-                    backgroundSize: '20px 1px',
-                    backgroundPosition: '16px 0'
-                }}></div>
+                <div
+                    className="h-full w-full"
+                    style={{
+                        backgroundImage:
+                            "linear-gradient(90deg, rgba(165, 165, 165, 0.5) 1px, transparent 1px)",
+                        backgroundSize: "20px 1px",
+                        backgroundPosition: "16px 0",
+                    }}
+                ></div>
             </div>
-            
+
             {/* Header Section */}
             <div className="text-center py-20 relative z-10">
                 <h1
                     className="inline-block text-5xl lg:text-6xl font-medium mb-4"
                     style={{
-                        background: "linear-gradient(90deg, #FFFFFF 0%, #D770D7 100%)",
+                        background:
+                            "linear-gradient(90deg, #FFFFFF 0%, #D770D7 100%)",
                         WebkitBackgroundClip: "text",
                         WebkitTextFillColor: "transparent",
                         backgroundClip: "text",
-                        color: "transparent"
+                        color: "transparent",
                     }}
                 >
                     My Projects
                 </h1>
-                <p className="text-white text-lg lg:text-xl">
-                    Some Subtitle
-                </p>
+                <p className="text-white text-lg lg:text-xl">Some Subtitle</p>
             </div>
-            
-            {projects.map((project) => (
-                <Image key={project.id} id={project.id} image={project.image} title={project.title} />
+
+            {projects.map((project, idx) => (
+                <Image
+                    key={project.id}
+                    id={project.id}
+                    image={project.image}
+                    title={project.title}
+                    isLast={idx === projects.length - 1}
+                />
             ))}
             <StyleSheet />
         </div>
-    )
-}
+    );
+};
 
 function StyleSheet() {
     return (
@@ -154,7 +183,6 @@ function StyleSheet() {
             width: 800px;
             height: auto;
             margin: 0 auto;
-            overflow: visible;
             position: relative;
         }
         .img-container img {
@@ -176,7 +204,7 @@ function StyleSheet() {
             }
         }
     `}</style>
-    )
+    );
 }
 
 export default Projects;
