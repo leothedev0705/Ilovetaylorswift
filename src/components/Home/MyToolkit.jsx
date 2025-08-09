@@ -32,13 +32,19 @@ const row2 = technologies.slice(7, 13);
 const row3 = technologies.slice(13, 19);
 
 function ParallaxRow({ cards, baseVelocity }) {
+  // Detect mobile screen
+  const isMobile = typeof window !== 'undefined' && window.innerWidth < 640;
+  // Use gentler spring settings for mobile
+  const springConfig = isMobile
+    ? { damping: 80, stiffness: 120 }
+    : { damping: 50, stiffness: 400 };
+  // Use higher base velocity for mobile to make it faster
+  const effectiveBaseVelocity = isMobile ? baseVelocity * 1.5 : baseVelocity;
+
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
-  const smoothVelocity = useSpring(scrollVelocity, {
-    damping: 50,
-    stiffness: 400
-  });
+  const smoothVelocity = useSpring(scrollVelocity, springConfig);
   const velocityFactor = useTransform(smoothVelocity, [0, 1000], [0, 5], {
     clamp: false
   });
@@ -48,12 +54,7 @@ function ParallaxRow({ cards, baseVelocity }) {
 
   const directionFactor = React.useRef(1);
   useAnimationFrame((t, delta) => {
-    let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
-    if (velocityFactor.get() < 0) {
-      directionFactor.current = -1;
-    } else if (velocityFactor.get() > 0) {
-      directionFactor.current = 1;
-    }
+    let moveBy = directionFactor.current * effectiveBaseVelocity * (delta / 1000);
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
     baseX.set(baseX.get() + moveBy);
   });
@@ -67,7 +68,7 @@ function ParallaxRow({ cards, baseVelocity }) {
         {repeated.map((tech, idx) => (
           <div
             key={idx}
-            className="flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-xl p-6 text-white hover:bg-white/10 transition-all duration-300 border-2 border-white/50 flex items-center space-x-4 min-w-[220px]"
+            className="toolkit-card flex-shrink-0 bg-white/5 backdrop-blur-sm rounded-xl p-6 text-white transition-all duration-300 border-2 border-white/50 flex items-center space-x-4 min-w-[220px] relative overflow-hidden"
           >
             <div className="w-14 h-14 rounded-lg flex items-center justify-center">
               <img
@@ -144,6 +145,13 @@ const MyToolkit = () => {
         .parallax {
           width: 100%;
           overflow: hidden;
+        }
+        .toolkit-card {
+          position: relative;
+          transition: all 0.3s ease;
+        }
+        .toolkit-card:hover {
+          border-color: #D770D7;
         }
       `}</style>
     </section>
