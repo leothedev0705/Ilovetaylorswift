@@ -15,22 +15,34 @@ function Image({ id, image, title }) {
     const [imgHeight, setImgHeight] = useState(0);
     const [textHeight, setTextHeight] = useState(0);
 
-    // Get scroll progress for this specific section
-    const { scrollYProgress } = useScroll({
-        target: containerRef,
-        offset: ["start end", "end start"]
-    });
+    // Use window scroll instead of section scroll
+    const { scrollY } = useScroll();
 
     useLayoutEffect(() => {
         if (imgRef.current) setImgHeight(imgRef.current.offsetHeight);
         if (textRef.current) setTextHeight(textRef.current.offsetHeight);
     }, []);
 
-    // Map scroll progress to text position: from top of image to bottom
+    // Calculate text position based on container position and window scroll
     const y = useTransform(
-        scrollYProgress,
-        [0, 1],
-        [0, Math.max(0, imgHeight - textHeight)]
+        scrollY,
+        (value) => {
+            if (!containerRef.current) return 0;
+            
+            const rect = containerRef.current.getBoundingClientRect();
+            const containerTop = rect.top + window.scrollY;
+            const containerBottom = containerTop + rect.height;
+            const currentScroll = value;
+            
+            // Calculate progress through this section
+            const progress = Math.max(0, Math.min(1, 
+                (currentScroll - containerTop + window.innerHeight) / 
+                (rect.height + window.innerHeight)
+            ));
+            
+            // Map progress to text position from top to bottom of image
+            return progress * (imgHeight - textHeight);
+        }
     );
 
     return (
@@ -51,7 +63,7 @@ function Image({ id, image, title }) {
                         backgroundClip: "text",
                         color: "transparent"
                     }}
-                    className="text-8xl lg:text-9xl font-medium absolute left-0 right-0 mx-auto drop-shadow-lg overlay-title"
+                    className="text-6xl lg:text-7xl font-medium absolute drop-shadow-lg overlay-title"
                 >
                     {title}
                 </motion.h2>
@@ -63,7 +75,7 @@ function Image({ id, image, title }) {
 const Projects = () => {
     const projects = [
         { id: 1, image: BaysideSportsImg, title: "Bayside Sports" },
-        { id: 2, image: BaysideSportsImg, title: "Project Two" }
+        { id: 2, image: BaysideSportsImg, title: "Fluxurous Tech" }
     ];
 
     return (
@@ -127,9 +139,7 @@ function StyleSheet() {
         }
         .overlay-title {
             top: 0;
-            left: 0;
-            right: 0;
-            margin: 0 auto;
+            left: -150px;
             text-align: left;
             pointer-events: none;
         }
