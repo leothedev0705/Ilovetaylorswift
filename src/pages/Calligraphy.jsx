@@ -3,7 +3,9 @@ import CalligraphyHero from '../components/HobbyHeroes/CalligraphyHero';
 import AboutMe from '../components/Home/AboutMe';
 import MyToolkit from '../components/Home/MyToolkit';
 import Projects from '../components/Home/Projects';
+import ContactMe from '../components/Home/ContactMe';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Calligraphy = () => {
   return (
@@ -13,8 +15,10 @@ const Calligraphy = () => {
       <AboutMe />
       <MyToolkit />
       <Projects />
+      <ContactMe />
+      <Footer />
     </div>
   );
 };
 
-export default Calligraphy; 
+export default Calligraphy;

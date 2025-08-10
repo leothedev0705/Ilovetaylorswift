@@ -61,51 +61,42 @@ const HomeHero = () => {
       {/* Main Content */}
       <div className="container mx-auto px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
         {/* Mobile Layout - Character at Top */}
-        <div ref={imgContainerRef} className="lg:hidden flex-1 flex justify-center items-center mb-8 overflow-hidden">
-          <motion.img 
-            src={LuziAnime} 
-            alt="Luzi Anime Character" 
-            style={{
-              height: '50vh',
-              width: 'auto',
-              maxWidth: 'none',
-              objectFit: 'contain',
-              y: parallaxY
-            }}
-            className="object-contain"
-            initial={{ y: 100, opacity: 0, scale: 0.95 }}
-            whileInView={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ duration: 1, ease: 'easeOut' }}
-            viewport={{ once: true, amount: 0.3 }}
+        <div className="lg:hidden w-full flex justify-center mb-8">
+          <img
+            src={LuziAnime}
+            alt="Luzi Anime Character"
+            className="h-48 sm:h-56 md:h-64 object-contain"
           />
         </div>
 
-        {/* Text Content - Mobile First */}
+        {/* Text Content */}
         <div className="flex-1 text-white z-10 text-center lg:text-left lg:pr-8">
           <div className="mb-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-cursive text-white mb-4 drop-shadow-2xl whitespace-nowrap">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-cursive text-white mb-4 drop-shadow-2xl">
               Luziana Dmello
             </h1>
-            <p className="text-2xl md:text-4xl lg:text-6xl text-white mb-8 drop-shadow-lg">
+            <p className="text-xl sm:text-2xl md:text-3xl lg:text-6xl text-white mb-8 drop-shadow-lg">
               is a {currentText}
               <span className="animate-pulse">|</span>
             </p>
           </div>
+          
           <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-12">
             <div className="relative">
-              <div className="w-1 h-32 lg:h-40 bg-white drop-shadow-lg absolute left-0"></div>
-              <div className="flex flex-col justify-end h-32 lg:h-40 ml-4">
+              <div className="w-1 h-20 sm:h-24 md:h-28 lg:h-40 bg-white drop-shadow-lg absolute left-0"></div>
+              <div className="flex flex-col justify-end h-20 sm:h-24 md:h-28 lg:h-40 ml-4">
                 <div className="flex flex-col space-y-2">
-                  <span className="text-white text-2xl lg:text-3xl drop-shadow-lg">who</span>
-                  <span className="text-white text-2xl lg:text-3xl drop-shadow-lg">likes</span>
+                  <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">who</span>
+                  <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">likes</span>
                 </div>
               </div>
             </div>
+            
             <div className="flex flex-col space-y-2">
-              <Link to="/painting" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">PAINTING</Link>
-              <Link to="/calligraphy" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
-              <Link to="/coding" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
-              <Link to="/knitting" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
+              <Link to="/painting" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">PAINTING</Link>
+              <Link to="/calligraphy" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
+              <Link to="/coding" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
+              <Link to="/knitting" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
             </div>
           </div>
         </div>

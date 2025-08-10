@@ -2,7 +2,7 @@ import React from 'react';
 
 const ContactMe = () => {
   return (
-    <section className="bg-black relative">
+    <section id="contact-me-section" className="bg-black relative">
       {/* Vertical Lines Background Pattern */}
       <div className="absolute inset-0 opacity-40">
         <div className="h-full w-full" style={{
@@ -118,6 +118,15 @@ const ContactMe = () => {
           </div>
         </div>
       </div>
+      {/* Remove extra bottom space */}
+      <style jsx>{`
+        section.bg-black {
+          padding-bottom: 0 !important;
+        }
+        .contact-bottom-space {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 };

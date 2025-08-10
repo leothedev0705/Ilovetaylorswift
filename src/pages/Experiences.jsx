@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Experiences = () => {
   return (
@@ -63,8 +64,9 @@ const Experiences = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };
 
-export default Experiences; 
+export default Experiences;

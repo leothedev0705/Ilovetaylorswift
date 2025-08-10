@@ -72,7 +72,7 @@ function Image({ id, image, title, isLast }) {
             className="img-container"
             ref={containerRef}
             style={{
-                paddingBottom: isLast ? "8rem" : "0", // extra space for last item
+                paddingBottom: isLast ? "0" : "2rem", // add extra space between items
                 overflow: "hidden", // prevent bleed
             }}
         >
@@ -123,7 +123,7 @@ const Projects = () => {
     ];
 
     return (
-        <div id="example" className="bg-black relative">
+        <div id="example" className="bg-black relative mb-0">
             {/* Vertical Lines Background Pattern */}
             <div className="absolute inset-0 opacity-40">
                 <div
@@ -177,7 +177,10 @@ function StyleSheet() {
             position: relative;
             min-height: unset;
             height: auto;
-            margin-bottom: 8rem;
+            margin-bottom: 4rem;
+        }
+        #example {
+            margin-bottom: 0 !important;
         }
         .img-container > div {
             width: 800px;

@@ -5,19 +5,21 @@ import MyToolkit from '../components/Home/MyToolkit';
 import Projects from '../components/Home/Projects';
 import ContactMe from '../components/Home/ContactMe';
 import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import '../styles/Home.css';
 
 const Home = () => {
   return (
-    <div className="home pb-32">
+    <div className="home">
       <Navbar />
       <HomeHero />
       <AboutMe />
       <MyToolkit />
       <Projects />
       <ContactMe />
+      <Footer />
     </div>
   );
 };
 
-export default Home; 
+export default Home;
