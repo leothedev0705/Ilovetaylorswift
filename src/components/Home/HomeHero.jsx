@@ -61,17 +61,26 @@ const HomeHero = () => {
       {/* Main Content */}
       <div className="container mx-auto px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
         {/* Mobile Layout - Character at Top */}
-        <div className="lg:hidden w-full flex justify-center mb-8">
+        <div className="lg:hidden relative w-full flex justify-center mb-2 px-4">
           <img
             src={LuziAnime}
             alt="Luzi Anime Character"
-            className="h-48 sm:h-56 md:h-64 object-contain"
+            className="h-[28rem] sm:h-[32rem] object-contain"
           />
+        </div>
+
+        {/* Mobile-only: Name and subtitle under the image */}
+        <div className="lg:hidden w-full text-center mb-4 px-4">
+          <h1 className="text-5xl sm:text-6xl max-[350px]:text-4xl font-cursive text-white drop-shadow-2xl whitespace-nowrap">
+            Luziana Dmello
+          </h1>
+          <p className="text-base sm:text-xl text-white mt-1 drop-shadow-lg">is a Designer</p>
         </div>
 
         {/* Text Content */}
         <div className="flex-1 text-white z-10 text-center lg:text-left lg:pr-8">
-          <div className="mb-8">
+          {/* Desktop/Large screens: keep animated headline */}
+          <div className="hidden lg:block mb-8">
             <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-9xl font-cursive text-white mb-4 drop-shadow-2xl">
               Luziana Dmello
             </h1>
@@ -80,29 +89,29 @@ const HomeHero = () => {
               <span className="animate-pulse">|</span>
             </p>
           </div>
-          
-          <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-12">
-            <div className="relative">
-              <div className="w-1 h-20 sm:h-24 md:h-28 lg:h-40 bg-white drop-shadow-lg absolute left-0"></div>
-              <div className="flex flex-col justify-end h-20 sm:h-24 md:h-28 lg:h-40 ml-4">
-                <div className="flex flex-col space-y-2">
-                  <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">who</span>
-                  <span className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">likes</span>
+
+          <div className="w-full flex flex-row items-start justify-center gap-6 lg:gap-12 px-2">
+            <div className="relative flex items-end pl-2 lg:flex-row-reverse">
+              <div className="flex flex-col justify-end h-20 sm:h-24 md:h-28 lg:h-40 max-[400px]:h-[220px] mr-3 lg:mr-0 lg:ml-3">
+                <div className="flex flex-col space-y-1 text-right lg:text-left">
+                  <span className="text-white text-xl sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">who</span>
+                  <span className="text-white text-xl sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">likes</span>
                 </div>
               </div>
+              <div className="w-[3px] lg:w-1 h-20 sm:h-24 md:h-28 lg:h-40 max-[400px]:h-[220px] bg-white drop-shadow-lg"></div>
             </div>
-            
-            <div className="flex flex-col space-y-2">
-              <Link to="/painting" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">PAINTING</Link>
-              <Link to="/calligraphy" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
-              <Link to="/coding" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
-              <Link to="/knitting" className="text-white text-lg sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
+
+            <div className="flex flex-col space-y-1 text-left ml-2">
+              <Link to="/painting" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">PAINTING</Link>
+              <Link to="/calligraphy" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
+              <Link to="/coding" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
+              <Link to="/knitting" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
             </div>
           </div>
         </div>
 
         {/* Desktop Layout - Character on Right */}
-        <div ref={imgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden">
+        <div ref={imgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden relative">
           <motion.img 
             src={LuziAnime} 
             alt="Luzi Anime Character" 

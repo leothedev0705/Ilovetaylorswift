@@ -61,7 +61,7 @@ const PaintingHero = () => {
       {/* Main Content */}
       <div className="container mx-auto px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
         {/* Mobile Layout - Character at Top */}
-        <div ref={imgContainerRef} className="lg:hidden flex-1 flex justify-center items-center mb-8 overflow-hidden">
+        <div ref={imgContainerRef} className="lg:hidden flex-1 flex justify-center items-center mb-8 overflow-hidden relative">
           <motion.img 
             src={PaintingGalImg} 
             alt="Painting Character" 
@@ -91,27 +91,27 @@ const PaintingHero = () => {
               <span className="animate-pulse">|</span>
             </p>
           </div>
-          <div className="flex flex-col lg:flex-row items-center lg:items-start space-y-8 lg:space-y-0 lg:space-x-12">
-            <div className="relative">
-              <div className="w-1 h-32 lg:h-40 bg-white drop-shadow-lg absolute left-0"></div>
-              <div className="flex flex-col justify-end h-32 lg:h-40 ml-4">
-                <div className="flex flex-col space-y-2">
-                  <span className="text-white text-2xl lg:text-3xl drop-shadow-lg">who</span>
-                  <span className="text-white text-2xl lg:text-3xl drop-shadow-lg">likes</span>
+          <div className="w-full flex flex-row items-start justify-center gap-6 lg:gap-12 px-2">
+            <div className="relative flex items-end pl-2 lg:flex-row-reverse">
+              <div className="flex flex-col justify-end h-20 sm:h-24 md:h-28 lg:h-40 max-[400px]:h-[220px] mr-3 lg:mr-0 lg:ml-3">
+                <div className="flex flex-col space-y-1 text-right lg:text-left">
+                  <span className="text-white text-xl sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">who</span>
+                  <span className="text-white text-xl sm:text-xl md:text-2xl lg:text-3xl drop-shadow-lg">likes</span>
                 </div>
               </div>
+              <div className="w-[3px] lg:w-1 h-20 sm:h-24 md:h-28 lg:h-40 max-[400px]:h-[220px] bg-white drop-shadow-lg"></div>
             </div>
-            <div className="flex flex-col space-y-2">
-              <Link to="/" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">HOME</Link>
-              <Link to="/calligraphy" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
-              <Link to="/coding" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
-              <Link to="/knitting" className="text-white text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
+            <div className="flex flex-col space-y-1 text-left ml-2">
+              <Link to="/" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">HOME</Link>
+              <Link to="/calligraphy" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CALLIGRAPHY</Link>
+              <Link to="/coding" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">CODING</Link>
+              <Link to="/knitting" className="text-white text-2xl sm:text-2xl md:text-2xl lg:text-3xl drop-shadow-lg hover:text-purple-200 transition-colors cursor-pointer">KNITTING</Link>
             </div>
           </div>
         </div>
 
         {/* Desktop Layout - Character on Right */}
-        <div ref={imgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden">
+        <div ref={imgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden relative">
           <motion.img 
             src={PaintingGalImg} 
             alt="Painting Character" 

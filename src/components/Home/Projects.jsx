@@ -74,6 +74,7 @@ function Image({ id, image, title, isLast }) {
             style={{
                 paddingBottom: isLast ? "0" : "0", // remove extra space between items
                 overflow: "hidden", // prevent bleed
+                position: "relative", // required for framer-motion scroll measurements
             }}
         >
             <div style={{ position: "relative" }}>

@@ -67,7 +67,8 @@ const ContactMe = () => {
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 bg-purple-600/20 rounded-full flex items-center justify-center">
                       <svg className="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 13.255A23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H8a2 2 0 01-2-2V8a2 2 0 012-2V6" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13.828 10.172a4 4 0 010 5.656l-3 3a4 4 0 11-5.656-5.656l1.5-1.5" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.172 13.828a4 4 0 005.656 0l3-3a4 4 0 10-5.656-5.656l-1.5 1.5" />
                       </svg>
                     </div>
                     <div>
@@ -119,7 +120,7 @@ const ContactMe = () => {
         </div>
       </div>
       {/* Remove extra bottom space */}
-      <style jsx>{`
+      <style>{`
         section.bg-black {
           padding-bottom: 0 !important;
         }
