@@ -8,7 +8,23 @@ const HomeHero = () => {
   const [currentText, setCurrentText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const imgContainerRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(false);
+  const desktopImgContainerRef = useRef(null);
+  const mobileImgContainerRef = useRef(null);
+  
+  // Check if device is mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024);
+    };
+    
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const texts = ['Designer', 'Developer', 'Vibe Coder'];
   const typingSpeed = 150;
@@ -41,9 +57,19 @@ const HomeHero = () => {
     }
   }, [currentText, currentIndex, isDeleting, texts]);
 
-  // Parallax effect
-  const { scrollYProgress } = useScroll({ target: imgContainerRef, offset: ['start end', 'end start'] });
-  const parallaxY = useTransform(scrollYProgress, [0, 1], [0, 30]);
+  // Parallax effect for desktop
+  const { scrollYProgress: desktopScrollY } = useScroll({
+    target: desktopImgContainerRef,
+    offset: ['start end', 'end start']
+  });
+  const desktopParallaxY = useTransform(desktopScrollY, [0, 1], [0, 30]);
+  
+  // Parallax effect for mobile (more subtle)
+  const { scrollYProgress: mobileScrollY } = useScroll({
+    target: mobileImgContainerRef,
+    offset: ['start end', 'end start']
+  });
+  const mobileParallaxY = useTransform(mobileScrollY, [0, 1], [0, 15]);
 
   return (
     <section 
@@ -59,13 +85,19 @@ const HomeHero = () => {
       <div className="absolute inset-0 bg-black bg-opacity-30 z-0"></div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
+      <div className="container mx-auto px-4 sm:px-8 flex flex-col lg:flex-row items-center justify-between max-w-7xl relative z-10">
         {/* Mobile Layout - Character at Top */}
-        <div className="lg:hidden relative w-full flex justify-center mb-2 px-4">
-          <img
+        <div ref={mobileImgContainerRef} className="lg:hidden relative w-full flex justify-center mb-2 px-4 overflow-hidden">
+          <motion.img
             src={LuziAnime}
             alt="Luzi Anime Character"
             className="h-[28rem] sm:h-[32rem] object-contain"
+            style={{
+              y: isMobile ? mobileParallaxY : 0
+            }}
+            initial={{ y: 20, opacity: 0.8 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
           />
         </div>
 
@@ -111,7 +143,7 @@ const HomeHero = () => {
         </div>
 
         {/* Desktop Layout - Character on Right */}
-        <div ref={imgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden relative">
+        <div ref={desktopImgContainerRef} className="hidden lg:flex flex-1 justify-center items-center min-h-screen overflow-hidden relative">
           <motion.img 
             src={LuziAnime} 
             alt="Luzi Anime Character" 
@@ -120,7 +152,7 @@ const HomeHero = () => {
               width: 'auto',
               maxWidth: 'none',
               objectFit: 'contain',
-              y: parallaxY
+              y: desktopParallaxY
             }}
             className="object-contain"
             initial={{ y: 100, opacity: 0, scale: 0.95 }}

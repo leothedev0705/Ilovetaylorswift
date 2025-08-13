@@ -1,0 +1,53 @@
+/* Responsive styles for parallax animations and other elements */
+
+/* Fix for text overflow on small screens */
+@media (max-width: 640px) {
+  .font-cursive {
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+    word-wrap: break-word;
+    hyphens: auto;
+  }
+  
+  /* Adjust vertical spacing on mobile */
+  .min-h-screen {
+    min-height: 100vh;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+}
+
+/* Optimize parallax performance on mobile devices */
+@media (max-width: 1024px) {
+  .parallax-container {
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
+
+/* Improve touch interactions on mobile */
+@media (hover: none) and (pointer: coarse) {
+  .hover\:text-purple-200:hover {
+    color: inherit;
+  }
+  
+  /* Add active state for touch devices */
+  .hover\:text-purple-200:active {
+    color: rgba(233, 213, 255, 1); /* purple-200 */
+    transition: color 0.1s ease;
+  }
+}
+
+/* Fix for image sizing on very small screens */
+@media (max-width: 350px) {
+  .object-contain {
+    max-height: 40vh !important;
+  }
+}
+
+/* Improve background image handling on mobile */
+@media (max-width: 768px) {
+  [style*="background-image"] {
+    background-attachment: scroll !important;
+    background-position: center center !important;
+  }
+}
