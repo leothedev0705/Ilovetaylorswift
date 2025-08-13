@@ -1,12 +1,22 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const location = useLocation();
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+
+  // Scroll to top when location changes
+  useEffect(() => {
+    scrollToTop();
+  }, [location]);
 
   return (
     <>
@@ -32,6 +42,7 @@ const Navbar = () => {
                 {/* Home Section */}
                 <Link
                   to="/"
+                  onClick={scrollToTop}
                   className="flex-1 text-center py-2 px-4 rounded-full text-gray-800 font-semibold hover:bg-purple-100 transition-all duration-300 text-sm"
                 >
                   Home
@@ -40,6 +51,7 @@ const Navbar = () => {
                 {/* About Me Section */}
                 <Link
                   to="/about"
+                  onClick={scrollToTop}
                   className="flex-1 text-center py-2 px-4 rounded-full text-gray-800 font-semibold hover:bg-purple-100 transition-all duration-300 text-sm"
                 >
                   About Me
@@ -48,18 +60,19 @@ const Navbar = () => {
                 {/* My Projects Section */}
                 <Link
                   to="/projects"
+                  onClick={scrollToTop}
                   className="flex-1 text-center py-2 px-4 rounded-full text-gray-800 font-semibold hover:bg-purple-100 transition-all duration-300 text-sm"
                 >
                   My Projects
                 </Link>
 
                 {/* Contact Me Button */}
-                <button
-                  onClick={toggleMenu}
+                <Link
+                  to="/#contact-me-section"
                   className="flex-1 text-center py-2 px-4 rounded-full text-gray-800 font-semibold hover:bg-purple-100 transition-all duration-300 text-sm"
                 >
                   Contact Me
-                </button>
+                </Link>
 
                 {/* View Resume Button */}
                 <a
@@ -96,35 +109,50 @@ const Navbar = () => {
             <div className="space-y-4">
               <Link
                 to="/"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  scrollToTop();
+                }}
                 className="block text-2xl font-semibold text-gray-800 hover:text-purple-600 transition-colors"
               >
                 HOME
               </Link>
               <Link
                 to="/about"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  scrollToTop();
+                }}
                 className="block text-2xl font-semibold text-gray-800 hover:text-purple-600 transition-colors"
               >
                 ABOUT ME
               </Link>
               <Link
                 to="/projects"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  scrollToTop();
+                }}
                 className="block text-2xl font-semibold text-gray-800 hover:text-purple-600 transition-colors"
               >
                 PROJECTS
               </Link>
               <Link
                 to="/experiences"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  scrollToTop();
+                }}
                 className="block text-2xl font-semibold text-gray-800 hover:text-purple-600 transition-colors"
               >
                 EXPERIENCES
               </Link>
               <Link
                 to="/contact"
-                onClick={toggleMenu}
+                onClick={() => {
+                  toggleMenu();
+                  scrollToTop();
+                }}
                 className="block text-2xl font-semibold text-gray-800 hover:text-purple-600 transition-colors"
               >
                 CONTACT
@@ -137,28 +165,40 @@ const Navbar = () => {
               <div className="space-y-3">
                 <Link
                   to="/painting"
-                  onClick={toggleMenu}
+                  onClick={() => {
+                    toggleMenu();
+                    scrollToTop();
+                  }}
                   className="block text-lg text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   PAINTING
                 </Link>
                 <Link
                   to="/calligraphy"
-                  onClick={toggleMenu}
+                  onClick={() => {
+                    toggleMenu();
+                    scrollToTop();
+                  }}
                   className="block text-lg text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   CALLIGRAPHY
                 </Link>
                 <Link
                   to="/coding"
-                  onClick={toggleMenu}
+                  onClick={() => {
+                    toggleMenu();
+                    scrollToTop();
+                  }}
                   className="block text-lg text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   CODING
                 </Link>
                 <Link
                   to="/knitting"
-                  onClick={toggleMenu}
+                  onClick={() => {
+                    toggleMenu();
+                    scrollToTop();
+                  }}
                   className="block text-lg text-gray-700 hover:text-purple-600 transition-colors"
                 >
                   KNITTING

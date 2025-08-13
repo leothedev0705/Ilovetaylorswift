@@ -72,7 +72,7 @@ function Image({ id, image, title, isLast }) {
             className="img-container"
             ref={containerRef}
             style={{
-                paddingBottom: isLast ? "0" : "2rem", // add extra space between items
+                paddingBottom: isLast ? "0" : "0", // remove extra space between items
                 overflow: "hidden", // prevent bleed
             }}
         >
@@ -155,15 +155,17 @@ const Projects = () => {
                 <p className="text-white text-lg lg:text-xl">Some Subtitle</p>
             </div>
 
-            {projects.map((project, idx) => (
+            <div className="flex flex-col gap-8">
+              {projects.map((project, idx) => (
                 <Image
-                    key={project.id}
-                    id={project.id}
-                    image={project.image}
-                    title={project.title}
-                    isLast={idx === projects.length - 1}
+                  key={project.id}
+                  id={project.id}
+                  image={project.image}
+                  title={project.title}
+                  isLast={idx === projects.length - 1}
                 />
-            ))}
+              ))}
+            </div>
             <StyleSheet />
         </div>
     );
@@ -177,7 +179,7 @@ function StyleSheet() {
             position: relative;
             min-height: unset;
             height: auto;
-            margin-bottom: 4rem;
+            margin-bottom: 0;
         }
         #example {
             margin-bottom: 0 !important;
@@ -191,6 +193,16 @@ function StyleSheet() {
         .img-container img {
             width: 800px;
             height: auto;
+        }
+        @media (max-width: 768px) {
+            .img-container > div {
+                width: 90%;
+                max-width: 350px;
+            }
+            .img-container img {
+                width: 100%;
+                height: auto;
+            }
         }
         .overlay-title {
             top: 0;

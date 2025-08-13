@@ -3,7 +3,7 @@ import React from 'react';
 export default function Footer() {
   return (
     <footer
-      className="relative w-full px-6 pt-8 pb-12 text-black"
+      className="relative w-full px-6 pt-8 pb-24 text-black"
       style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Vertical lines background */}
